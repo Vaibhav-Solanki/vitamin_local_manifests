@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <!--Remotes-->
+    <remote name="los"            fetch="https://github.com/LineageOS"           revision="lineage-21" />
+    <remote name="muppets"        fetch="https://github.com/TheMuppets"          revision="lineage-21" />
+    <remote name="mashopy"  fetch="https://gitlab.com/Mashopy" />
+
+    <!-- Add all your repositories here -->
+    
+    <!-- Device repository -->
+    <project name="lineageos-on-vitamin/android_device_oneplus_vitamin" path="device/oneplus/vitamin" revision="lineage-22.1" />
+    
+    <!-- Hardware repository -->
+    <project name="lineageos-on-vitamin/android_hardware_oplus" path="hardware/oplus" revision="lineage-22.1" />
+    
+    <!-- Kernel repository -->
+    <project name="lineageos-on-vitamin/android_kernel_oneplus_mt6983" path="Kernel/mediatek/k510" revision="lineage-22.1" />
+    
+    <!-- Kernel extensions repository -->
+    <project name="lineageos-on-vitamin/android_device_oneplus_vitamin-kernel" path="device/oneplus/vitamin-kernel" revision="lineage-22.1" />
+    
+    <!-- Vendor repository -->
+    <project name="proprietary_vendor_oneplus_vitamin" path="vendor/oneplus/vitamin" remote="mashopy" revision="lineage-22.1" />
+    
+    <!-- Mediatek hardware repository -->
+    <project name="LineageOS/android_hardware_mediatek" path="hardware/mediatek" revision="lineage-22.1" />
+    
+    <!-- SEPolicy repository -->
+    <project name="LineageOS/android_device_mediatek_sepolicy_vndr" path="device/mediatek/sepolicy_vndr" revision="lineage-22.1" />
+</manifest>
