@@ -14,7 +14,7 @@
     <project name="lineageos-on-vitamin/android_hardware_oplus" path="hardware/oplus" revision="lineage-22.1" />
     
     <!-- Kernel repository -->
-    <project name="lineageos-on-vitamin/android_kernel_oneplus_mt6983" path="Kernel/mediatek/k510" revision="lineage-22.1" />
+    <project name="lineageos-on-vitamin/android_kernel_oneplus_mt6983" path="kernel/mediatek/k510" revision="lineage-22.1" />
     
     <!-- Kernel extensions repository -->
     <project name="lineageos-on-vitamin/android_device_oneplus_vitamin-kernel" path="device/oneplus/vitamin-kernel" revision="lineage-22.1" />
