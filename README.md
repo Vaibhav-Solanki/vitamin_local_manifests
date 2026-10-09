@@ -19,10 +19,10 @@ curl -o .repo/local_manifests/vitamin.xml https://raw.githubusercontent.com/Vaib
 repo sync -c -j$(nproc --all) --no-clone-bundle --no-tags
 ```
 
-The kernel source is synced by default because the build generates kernel UAPI headers from it, even though the prebuilt kernel is what ships. The kernel modules source is optional:
+The kernel source and the OnePlus kernel-modules repo are both synced by default: the build generates kernel UAPI headers from the kernel tree, and that tree symlinks into the modules repo, which must live at `kernel/common`. To refresh only those two:
 
 ```bash
-repo sync -c -g default,kernel
+repo sync -c kernel/common kernel/common/android12-5.10
 ```
 
 ## What the manifest provides
@@ -36,6 +36,7 @@ repo sync -c -g default,kernel
 | `hardware/oplus` | mt6983-development/hardware_oplus | lineage-23.2 | oplus-fwk, vintf |
 | `hardware/mediatek` | mt6983-development/android_hardware_mediatek | lineage-23.2 | `lineage.dependencies` |
 | `device/mediatek/sepolicy_vndr` | mt6983-development/android_device_mediatek_sepolicy_vndr | lineage-23.2 | `BoardConfig.mk` |
+| `kernel/common` | mt6983-development/android_kernel_modules_oneplus_mt6983 | lineage-23.2 | symlink targets of the kernel tree |
 | `kernel/common/android12-5.10` | mt6983-development/android_kernel_oneplus_mt6983 | lineage-23.2 | `TARGET_KERNEL_SOURCE`, header generation |
 
 Everything else the device tree references (`hardware/google/pixel`, `hardware/lineage/interfaces`,
