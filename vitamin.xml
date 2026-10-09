@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest>
-    <!--Remotes-->
-    <remote name="los"            fetch="https://github.com/LineageOS"           revision="lineage-21" />
-    <remote name="muppets"        fetch="https://github.com/TheMuppets"          revision="lineage-21" />
-    <remote name="mashopy"  fetch="https://gitlab.com/Mashopy" />
+<!--
+  Local manifest for OnePlus Nord 3 5G (vitamin, MT6983) on PixelOS fifteen (Android 15).
+  Place at .repo/local_manifests/vitamin.xml
 
-    <!-- Add all your repositories here -->
-    
-    <!-- Device repository -->
-    <project name="lineageos-on-vitamin/android_device_oneplus_vitamin" path="device/oneplus/vitamin" revision="lineage-22.1" />
-    
-    <!-- Hardware repository -->
-    <project name="lineageos-on-vitamin/android_hardware_oplus" path="hardware/oplus" revision="lineage-22.1" />
-    
-    <!-- Kernel repository -->
-    <project name="lineageos-on-vitamin/android_kernel_oneplus_mt6983" path="kernel/mediatek/k510" revision="lineage-22.1" />
-    <project name="lineageos-on-vitamin/android_kernel_modules_oneplus_mt6983" path="kernel/mediatek/vendor" revision="lineage-22.1" />
-    
-    <!-- Kernel extensions repository -->
-    <project name="lineageos-on-vitamin/android_device_oneplus_vitamin-kernel" path="device/oneplus/vitamin-kernel" revision="lineage-22.1" />
-    
-    <!-- Vendor repository -->
-    <project name="proprietary_vendor_oneplus_vitamin" path="vendor/oneplus/vitamin" remote="mashopy" revision="lineage-22.1" />
-    
-    <!-- Mediatek hardware repository -->
-    <project name="LineageOS/android_hardware_mediatek" path="hardware/mediatek" revision="lineage-22.1" />
-    
-    <!-- SEPolicy repository -->
-    <project name="LineageOS/android_device_mediatek_sepolicy_vndr" path="device/mediatek/sepolicy_vndr" revision="lineage-22.1" />
+  Remotes are declared here so this manifest never falls back to the ROM's
+  default remote (PixelOS defaults to android.googlesource.com, which would break
+  every unqualified project).
+
+  Branch choice: lineage-22.2 matches the LineageOS revision PixelOS fifteen
+  pins its own LineageOS/* repos to, and is the branch of the last vitamin
+  release (22.2-20250419).
+-->
+<manifest>
+    <remote name="los-vitamin" fetch="https://github.com/lineageos-on-vitamin" revision="lineage-22.2" />
+    <remote name="los"         fetch="https://github.com/LineageOS"           revision="lineage-22.2" />
+    <remote name="mashopy"     fetch="https://gitlab.com/Mashopy"             revision="lineage-22.2" />
+
+    <!-- Device tree and prebuilt kernel (Image.gz, dtb, dtbo.img, modules) -->
+    <project name="android_device_oneplus_vitamin"        path="device/oneplus/vitamin"        remote="los-vitamin" />
+    <project name="android_device_oneplus_vitamin-kernel" path="device/oneplus/vitamin-kernel" remote="los-vitamin" />
+
+    <!-- OPlus hardware (oplus-fwk, sepolicy/mtk, vintf) -->
+    <project name="android_hardware_oplus"                path="hardware/oplus"                remote="los-vitamin" />
+
+    <!-- MediaTek hardware and vendor sepolicy (declared in lineage.dependencies / BoardConfig.mk) -->
+    <project name="android_hardware_mediatek"             path="hardware/mediatek"             remote="los" />
+    <project name="android_device_mediatek_sepolicy_vndr" path="device/mediatek/sepolicy_vndr" remote="los" />
+
+    <!-- Proprietary blobs -->
+    <project name="proprietary_vendor_oneplus_vitamin"    path="vendor/oneplus/vitamin"        remote="mashopy" />
+
+    <!--
+      Kernel source. Not synced by default: BoardConfig.mk sets
+      TARGET_FORCE_PREBUILT_KERNEL := true and only points TARGET_KERNEL_SOURCE
+      at kernel/common/android12-5.10. Sync with: repo sync -g default,kernel
+    -->
+    <project name="android_kernel_oneplus_mt6983"         path="kernel/common/android12-5.10"  remote="los-vitamin" groups="notdefault,kernel" />
+    <project name="android_kernel_modules_oneplus_mt6983" path="kernel/mediatek/mt6983-modules" remote="los-vitamin" groups="notdefault,kernel" />
 </manifest>
