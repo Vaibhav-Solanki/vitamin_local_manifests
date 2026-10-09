@@ -33,11 +33,12 @@
     <project name="android_device_mediatek_sepolicy_vndr" path="device/mediatek/sepolicy_vndr" remote="mt6983-dev" />
 
     <!--
-      Kernel source. Not synced by default: BoardConfig.mk forces the prebuilt
-      kernel and only points TARGET_KERNEL_SOURCE at kernel/common/android12-5.10.
+      Kernel source. Required even though the prebuilt kernel is used:
+      vendor/lineage's generated_kernel_includes runs `make headers_install`
+      against TARGET_KERNEL_SOURCE (kernel/common/android12-5.10).
+      Kernel modules source stays opt-in: repo sync -c -g default,kernel
       To rebuild the kernel use https://github.com/mt6983-development/kernel_manifest
-      instead, or sync these with: repo sync -c -g default,kernel
     -->
-    <project name="android_kernel_oneplus_mt6983"         path="kernel/common/android12-5.10"   remote="mt6983-dev" groups="notdefault,kernel" />
+    <project name="android_kernel_oneplus_mt6983"         path="kernel/common/android12-5.10"   remote="mt6983-dev" />
     <project name="android_kernel_modules_oneplus_mt6983" path="kernel/mediatek/mt6983-modules" remote="mt6983-dev" groups="notdefault,kernel" />
 </manifest>

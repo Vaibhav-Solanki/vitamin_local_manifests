@@ -19,7 +19,7 @@ curl -o .repo/local_manifests/vitamin.xml https://raw.githubusercontent.com/Vaib
 repo sync -c -j$(nproc --all) --no-clone-bundle --no-tags
 ```
 
-Kernel source is optional (the tree ships a prebuilt kernel). To sync it too:
+The kernel source is synced by default because the build generates kernel UAPI headers from it, even though the prebuilt kernel is what ships. The kernel modules source is optional:
 
 ```bash
 repo sync -c -g default,kernel
@@ -36,6 +36,7 @@ repo sync -c -g default,kernel
 | `hardware/oplus` | mt6983-development/hardware_oplus | lineage-23.2 | oplus-fwk, vintf |
 | `hardware/mediatek` | mt6983-development/android_hardware_mediatek | lineage-23.2 | `lineage.dependencies` |
 | `device/mediatek/sepolicy_vndr` | mt6983-development/android_device_mediatek_sepolicy_vndr | lineage-23.2 | `BoardConfig.mk` |
+| `kernel/common/android12-5.10` | mt6983-development/android_kernel_oneplus_mt6983 | lineage-23.2 | `TARGET_KERNEL_SOURCE`, header generation |
 
 Everything else the device tree references (`hardware/google/pixel`, `hardware/lineage/interfaces`,
 `hardware/lineage/compat`, `vendor/lineage/config`, `vendor/qcom/opensource/vibrator`,
